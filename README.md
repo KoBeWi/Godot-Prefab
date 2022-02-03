@@ -48,7 +48,7 @@ func _ready():
 It became lengthy though, it would be nice to put it into some method probably.
 
 Luckily, this is exactly what Prefab does:
-```
+```GDScript
 var slot: Prefab
 
 func _ready():
