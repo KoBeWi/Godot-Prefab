@@ -6,7 +6,7 @@ Custom class for Godot that extends PackedScene with ability to pack a node recu
 
 Imagine you have a scene like this:
 
-![](https://github.com/KoBeWi/Godot-Prefab/blob/master/Media/ReadmeExample.gif)
+![](https://github.com/KoBeWi/Godot-Prefab/blob/master/Media/ReadmeExample.png)
 
 You have some container with another container that has a few nodes. You want a few copies of the Slot node. Normally you'd just save it as a separate scene, BUT! this is the only place where you will use it and it's just 3 nodes. Totally not worth it to create just another file, which you will have to put somewhere. Such a hassle. If you think otherwise, you could as well stop reading now.
 
