@@ -7,6 +7,9 @@ static func create(node: Node, deferred_free := false) -> Prefab:
 	var to_check := node.get_children()
 	while not to_check.empty():
 		var sub: Node = to_check.pop_back()
+		if sub.owner == null:
+			continue
+		
 		to_check.append_array(sub.get_children())
 		sub.owner = node
 	
@@ -19,3 +22,4 @@ static func create(node: Node, deferred_free := false) -> Prefab:
 		node.free()
 	
 	return prefab
+	
