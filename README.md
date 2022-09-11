@@ -43,7 +43,7 @@ func _ready():
     $Slot.free() # The original node is not needed, so yeet it.
 
     for i in 10:
-        add_child(slot.instance())
+        add_child(slot.instantiate())
 ```
 It became lengthy though, it would be nice to put it into some method probably.
 
@@ -55,7 +55,7 @@ func _ready():
     slot = Prefab.create($Slot)
 
     for i in 10:
-        add_child(slot.instance())
+        add_child(slot.instantiate())
 ```
 The second, optional, argument of `create()` makes it use `queue_free()` instead of `free()` (sometimes it's required).
 

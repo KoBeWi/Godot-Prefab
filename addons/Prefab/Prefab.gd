@@ -5,7 +5,7 @@ static func create(node: Node, deferred_free := false) -> Prefab:
 	assert(node, "Invalid node provided.")
 	
 	var to_check := node.get_children()
-	while not to_check.empty():
+	while not to_check.is_empty():
 		var sub: Node = to_check.pop_back()
 		if sub.owner == null:
 			continue
@@ -13,7 +13,7 @@ static func create(node: Node, deferred_free := false) -> Prefab:
 		to_check.append_array(sub.get_children())
 		sub.owner = node
 	
-	var prefab: Prefab = load("res://addons/Prefab/Prefab.gd").new()
+	var prefab := Prefab.new()
 	prefab.pack(node)
 	
 	if deferred_free:
@@ -22,4 +22,3 @@ static func create(node: Node, deferred_free := false) -> Prefab:
 		node.free()
 	
 	return prefab
-	
