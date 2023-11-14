@@ -1,7 +1,9 @@
 extends PackedScene
 class_name Prefab
 
-static func create(node: Node, deferred_free := false) -> Prefab:
+enum { FREE_MODE_INSTANT, FREE_MODE_DEFERRED, FREE_MODE_NONE }
+
+static func create(node: Node, free_mode: int = FREE_MODE_INSTANT) -> Prefab:
 	assert(node, "Invalid node provided.")
 	
 	var to_check := node.get_children()
@@ -16,9 +18,12 @@ static func create(node: Node, deferred_free := false) -> Prefab:
 	var prefab := Prefab.new()
 	prefab.pack(node)
 	
-	if deferred_free:
-		node.queue_free()
-	else:
-		node.free()
+	match free_mode:
+		FREE_MODE_INSTANT:
+			node.free()
+		FREE_MODE_DEFERRED:
+			node.queue_free()
+		FREE_MODE_NONE:
+			pass
 	
 	return prefab

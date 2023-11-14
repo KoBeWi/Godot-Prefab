@@ -1,4 +1,4 @@
-# <img src="https://github.com/KoBeWi/Godot-Prefab/blob/master/Media/Icon.png" width="64" height="64"> Godot Prefab
+# <img src="Media/Icon.png" width="64" height="64"> Godot Prefab
 
 Custom class for Godot that extends PackedScene with ability to pack a node recursively and then auto-free it.
 
@@ -6,7 +6,7 @@ Custom class for Godot that extends PackedScene with ability to pack a node recu
 
 Imagine you have a scene like this:
 
-![](https://github.com/KoBeWi/Godot-Prefab/blob/master/Media/ReadmeExample.png)
+![](Media/ReadmeExample.png)
 
 You have some container with another container that has a few nodes. You want a few copies of the Slot node. Normally you'd just save it as a separate scene, BUT! this is the only place where you will use it and it's just 3 nodes. Totally not worth it to create just another file, which you will have to put somewhere. Such a hassle. If you think otherwise, you could as well stop reading now.
 
@@ -57,7 +57,15 @@ func _ready():
     for i in 10:
         add_child(slot.instantiate())
 ```
-The second, optional, argument of `create()` makes it use `queue_free()` instead of `free()` (sometimes it's required).
+`create()` method has an optional parameter that determines how the original node will be freed. Possible values are:
+- `FREE_MODE_INSTANT` - The node is freed using `free()`. Default.
+- `FREE_MODE_DEFERRED` - The node is freed using `queue_free()`.
+- `FREE_MODE_NONE` - The node is not freed.
+
+Example:
+```GDScript
+Prefab.create($Node, Prefab.FREE_MODE_DEFERRED)
+```
 
 Note that Prefab basically being a PackedScene means that you can save it to a file. It's not the intended usage though.
 
