@@ -13,7 +13,9 @@ static func create(node: Node, free_mode: int = FREE_MODE_INSTANT) -> Prefab:
 			continue
 		
 		to_check.append_array(sub.get_children())
-		sub.owner = node
+		
+		if not node.owner or sub.owner == node.owner:
+			sub.owner = node
 	
 	var prefab := Prefab.new()
 	prefab.pack(node)
